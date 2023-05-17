@@ -5,6 +5,7 @@ import { store } from "./app/store";
 import Root from "./root";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import Context from "./context";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <Root />
+        <Context>
+          <Root />
+        </Context>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

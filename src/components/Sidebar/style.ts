@@ -7,18 +7,14 @@ export const Container = styled.div`
   display: flex;
 `;
 export const SidebarContainer = styled.div`
-  /* width: var(--widthNavbar); */
-  /* background: #ffffff; */
   padding: 10px 0;
   box-shadow: 0px 8px 8px #f5f6f8;
   display: flex;
   flex-direction: column;
-  /* row-gap: 24px; */
   .active {
     color: #1890ff;
     & path {
       fill: #1890ff;
-      /* stroke: #1890ff; */
     }
   }
 `;
@@ -77,4 +73,28 @@ export const LinkButton = styled(ListItemButton)<ButtonProp>`
 
 export const NavlinkArrow = styled(arrow)`
   margin-left: auto;
+`;
+
+export const ParentLink = styled.div<any>`
+  display: flex;
+  align-items: center;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #253e5f;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  text-decoration: none;
+  width: 100%;
+  /* padding: 12px 30px 12px 25px; */
+  padding-left: 25px;
+  .active {
+    color: #1890ff;
+    & path {
+      fill: #1890ff;
+    }
+  }
 `;

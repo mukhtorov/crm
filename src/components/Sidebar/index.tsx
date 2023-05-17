@@ -13,9 +13,17 @@ import {
   LinkButton,
   Logo,
   NavlinkArrow,
+  ParentLink,
   SidebarContainer,
 } from "./style";
 import { sidebar } from "../../utils/sidebar";
+import MuiAccordionSummary, {
+  AccordionSummaryProps,
+} from "@mui/material/AccordionSummary";
+
+import AccordionSummary from "@mui/material/AccordionSummary";
+import { Accordion, AccordionDetails, Button, Tooltip } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 280;
 
@@ -89,6 +97,9 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const location = useLocation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -97,6 +108,11 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -114,22 +130,83 @@ export default function MiniDrawer() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <Logo title onClick={handleDrawerClose}>
+          <Logo title="true" onClick={handleDrawerClose}>
             Webbrain CRM
           </Logo>
         </DrawerHeader>
         <Divider />
+
         <SidebarContainer>
-          {sidebar.map(({ id, path, title, icon, hidden }) => {
+          {sidebar.map(({ id, path, title, icon, hidden, children }) => {
+            console.log(location.pathname.includes(path), "test");
+
             return (
-              !hidden && (
+              !hidden &&
+              (children?.length ? (
+                <Accordion
+                  disabled={!open}
+                  key={path}
+                  expanded={expanded === path}
+                  onChange={handleChange(path)}
+                >
+                  <AccordionSummary
+                    expandIcon={open && <NavlinkArrow />}
+                    id={path}
+                  >
+                    <ParentLink
+                      className={location.pathname.includes(path) && "active"}
+                    >
+                      {icon}{" "}
+                      {open ? (
+                        title
+                      ) : (
+                        <Tooltip
+                          arrow
+                          title={
+                            <React.Fragment>
+                              {children.map((child) => {
+                                return (
+                                  <Typography key={child.path}>
+                                    <LinkButton key={child.id || child.path}>
+                                      <Link to={`${path}${child.path}`}>
+                                        {child.title}
+                                      </Link>
+                                    </LinkButton>
+                                  </Typography>
+                                );
+                              })}
+                            </React.Fragment>
+                          }
+                          placement="right"
+                        >
+                          <Button>{title}</Button>
+                        </Tooltip>
+                      )}
+                    </ParentLink>
+                  </AccordionSummary>
+
+                  <AccordionDetails>
+                    {children.map((child) => {
+                      return (
+                        <Typography key={child.path}>
+                          <LinkButton key={child.id || child.path}>
+                            <Link to={`${path}${child.path}`}>
+                              {child.title}
+                            </Link>
+                          </LinkButton>
+                        </Typography>
+                      );
+                    })}
+                  </AccordionDetails>
+                </Accordion>
+              ) : (
                 <LinkButton key={id || path}>
                   <Link to={path}>
                     {icon} {title}
-                    <NavlinkArrow />
+                    {children?.length ? <NavlinkArrow /> : null}
                   </Link>
                 </LinkButton>
-              )
+              ))
             );
           })}
         </SidebarContainer>

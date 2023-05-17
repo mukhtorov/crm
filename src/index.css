@@ -21,3 +21,26 @@ body {
   min-height: 20px;
   min-width: 20px;
 }
+
+/* MUI */
+.MuiButtonBase-root,
+.MuiAccordionSummary-root,
+.MuiAccordionSummary-gutters,
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root,
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root:before {
+  display: none !important;
+}
+
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
+  min-height: 44px !important;
+  max-height: 44px !important;
+}
+
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+  margin: 0 !important;
+}

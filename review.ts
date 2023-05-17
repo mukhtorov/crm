@@ -6,3 +6,11 @@
   // 404 page
   // logo
 }
+
+// BUGS
+{
+  // sidebar expand, shake
+}
+
+// done
+// route element changed to Generics
