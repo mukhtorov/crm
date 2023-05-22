@@ -6,6 +6,7 @@ import { ReactComponent as arrow } from "../../assets/icons/rightArrow.svg";
 export const Container = styled.div`
   display: flex;
 `;
+
 export const SidebarContainer = styled.div`
   padding: 10px 0;
   box-shadow: 0px 8px 8px #f5f6f8;
@@ -23,6 +24,7 @@ interface Props {
   open?: boolean;
   title?: any;
 }
+
 export const Logo = styled.h1<Props>`
   font-family: "Montserrat";
   font-style: normal;
@@ -30,12 +32,14 @@ export const Logo = styled.h1<Props>`
   font-size: 20px;
   line-height: 28px;
   display: flex;
-  align-items: center;
-  color: ${(props) => (props.title ? "#1890ff" : "white")};
-  margin-right: ${(props) => !props.open && "14px"};
+  justify-content: center;
 
-  height: 60px;
-  /* padding: 0 15px 0 25px; */
+  align-items: center;
+  min-width: ${({ title }) => !title && "65px"};
+  padding-left: ${({ title }) => title && "15px"};
+  color: ${(props) => (props.title ? "#1890ff" : "white")};
+
+  height: 65px;
   border-bottom: 1px solid #f8fafc;
   display: ${(props) => props.open && "none"};
   cursor: pointer;

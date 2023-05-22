@@ -44,3 +44,16 @@ body {
 .css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
   margin: 0 !important;
 }
+
+.MuiTooltip-tooltip {
+  background-color: whitesmoke !important;
+}
+
+.MuiTooltip-popper[data-popper-placement*="right"]
+  .css-1k51tf5-MuiTooltip-tooltip {
+  margin-left: -50px !important;
+}
+
+.css-hyum1k-MuiToolbar-root {
+  padding-left: 0 !important;
+}

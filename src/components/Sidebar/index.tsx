@@ -1,10 +1,9 @@
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -17,9 +16,7 @@ import {
   SidebarContainer,
 } from "./style";
 import { sidebar } from "../../utils/sidebar";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Accordion, AccordionDetails, Button, Tooltip } from "@mui/material";
@@ -50,10 +47,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
-  // alignItems: "center",
-  // justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -95,10 +89,9 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
 }));
 
 export default function MiniDrawer() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [tooltipOpen, setTooltipOpen] = React.useState("");
   const [expanded, setExpanded] = React.useState<string | false>(false);
-
   const location = useLocation();
 
   const handleDrawerOpen = () => {
@@ -106,6 +99,7 @@ export default function MiniDrawer() {
   };
 
   const handleDrawerClose = () => {
+    setTooltipOpen("");
     setOpen(false);
   };
 
@@ -113,7 +107,20 @@ export default function MiniDrawer() {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
+  const handleTooltipClose = () => {
+    console.log("close title");
 
+    setTooltipOpen("");
+  };
+  const handleTooltipOpen = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    title: any
+  ) => {
+    if (!open) {
+      e.stopPropagation();
+      setTooltipOpen(title);
+    }
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -138,63 +145,70 @@ export default function MiniDrawer() {
 
         <SidebarContainer>
           {sidebar.map(({ id, path, title, icon, hidden, children }) => {
-            console.log(location.pathname.includes(path), "test");
-
             return (
               !hidden &&
               (children?.length ? (
                 <Accordion
-                  disabled={!open}
                   key={path}
-                  expanded={expanded === path}
+                  expanded={open && expanded === path}
                   onChange={handleChange(path)}
                 >
                   <AccordionSummary
                     expandIcon={open && <NavlinkArrow />}
                     id={path}
+                    style={{
+                      minWidth: "fit-content",
+                    }}
                   >
                     <ParentLink
                       className={location.pathname.includes(path) && "active"}
                     >
-                      {icon}{" "}
-                      {open ? (
-                        title
-                      ) : (
-                        <Tooltip
-                          arrow
-                          title={
-                            <React.Fragment>
-                              {children.map((child) => {
-                                return (
-                                  <Typography key={child.path}>
-                                    <LinkButton key={child.id || child.path}>
-                                      <Link to={`${path}${child.path}`}>
-                                        {child.title}
-                                      </Link>
-                                    </LinkButton>
-                                  </Typography>
-                                );
-                              })}
-                            </React.Fragment>
-                          }
-                          placement="right"
-                        >
-                          <Button>{title}</Button>
-                        </Tooltip>
-                      )}
+                      <ClickAwayListener onClickAway={handleTooltipClose}>
+                        <div>
+                          <Tooltip
+                            arrow
+                            onClose={handleTooltipClose}
+                            open={tooltipOpen === title}
+                            disableFocusListener
+                            disableHoverListener
+                            title={
+                              <React.Fragment>
+                                {children.map((child) => {
+                                  return (
+                                    <Typography key={child.path}>
+                                      <LinkButton key={child.id || child.path}>
+                                        <Link to={`${path}${child.path}`}>
+                                          {child.title}
+                                        </Link>
+                                      </LinkButton>
+                                    </Typography>
+                                  );
+                                })}
+                              </React.Fragment>
+                            }
+                            placement="right"
+                          >
+                            <div
+                              onClick={(e) => handleTooltipOpen(e, title)}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              {icon} {title}
+                            </div>
+                          </Tooltip>
+                        </div>
+                      </ClickAwayListener>
                     </ParentLink>
                   </AccordionSummary>
 
                   <AccordionDetails>
                     {children.map((child) => {
                       return (
-                        <Typography key={child.path}>
-                          <LinkButton key={child.id || child.path}>
-                            <Link to={`${path}${child.path}`}>
-                              {child.title}
-                            </Link>
-                          </LinkButton>
-                        </Typography>
+                        <LinkButton key={child.id || child.path}>
+                          <Link to={`${path}${child.path}`}>{child.title}</Link>
+                        </LinkButton>
                       );
                     })}
                   </AccordionDetails>
@@ -203,7 +217,6 @@ export default function MiniDrawer() {
                 <LinkButton key={id || path}>
                   <Link to={path}>
                     {icon} {title}
-                    {children?.length ? <NavlinkArrow /> : null}
                   </Link>
                 </LinkButton>
               ))
