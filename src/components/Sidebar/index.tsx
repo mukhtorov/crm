@@ -108,8 +108,6 @@ export default function MiniDrawer() {
       setExpanded(isExpanded ? panel : false);
     };
   const handleTooltipClose = () => {
-    console.log("close title");
-
     setTooltipOpen("");
   };
   const handleTooltipOpen = (
@@ -176,7 +174,10 @@ export default function MiniDrawer() {
                                 {children.map((child) => {
                                   return (
                                     <Typography key={child.path}>
-                                      <LinkButton key={child.id || child.path}>
+                                      <LinkButton
+                                        component={"span"}
+                                        key={child.id || child.path}
+                                      >
                                         <Link to={`${path}${child.path}`}>
                                           {child.title}
                                         </Link>

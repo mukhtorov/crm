@@ -69,6 +69,7 @@ export const Link = styled(NavLink)`
 
 interface ButtonProp {
   key?: any;
+  component?: string;
 }
 
 export const LinkButton = styled(ListItemButton)<ButtonProp>`
