@@ -8,6 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import {
+  BodyContent,
   Link,
   LinkButton,
   Logo,
@@ -21,7 +22,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Accordion, AccordionDetails, Button, Tooltip } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
 
 const drawerWidth = 280;
@@ -209,7 +210,14 @@ export default function MiniDrawer() {
                                         component={"span"}
                                         key={child.id || child.path}
                                       >
-                                        <Link to={`${path}${child.path}`}>
+                                        <Link
+                                          to={`${path}${child.path}`}
+                                          state={{
+                                            title: child.title,
+                                            parent: title,
+                                            path: path,
+                                          }}
+                                        >
                                           {child.title}
                                         </Link>
                                       </LinkButton>
@@ -240,7 +248,16 @@ export default function MiniDrawer() {
                     {children.map((child) => {
                       return (
                         <LinkButton key={child.id || child.path}>
-                          <Link to={`${path}${child.path}`}>{child.title}</Link>
+                          <Link
+                            to={`${path}${child.path}`}
+                            state={{
+                              title: child.title,
+                              parent: title,
+                              path: path,
+                            }}
+                          >
+                            {child.title}
+                          </Link>
                         </LinkButton>
                       );
                     })}
@@ -248,7 +265,12 @@ export default function MiniDrawer() {
                 </Accordion>
               ) : (
                 <LinkButton key={id || path} parent="true">
-                  <Link to={path}>
+                  <Link
+                    to={{ pathname: path }}
+                    state={{ parent: title, path: path }}
+                    className="link"
+                  >
+                    {/* <Link to={path}> */}
                     {icon} {title}
                   </Link>
                 </LinkButton>
@@ -257,9 +279,11 @@ export default function MiniDrawer() {
           })}
         </SidebarContainer>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, background: "white" }}>
         <DrawerHeader />
-        <Typography paragraph>Body Contnt</Typography>
+        <BodyContent>
+          <Outlet />
+        </BodyContent>
       </Box>
     </Box>
   );

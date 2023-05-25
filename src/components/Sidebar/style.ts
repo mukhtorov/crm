@@ -52,7 +52,7 @@ export const BodyContainer = styled.div`
   border: 1px solid blue;
 `;
 
-export const Link = styled(NavLink)`
+export const Link = styled(NavLink)<{ className?: string }>`
   display: flex;
   align-items: center;
   font-family: "Montserrat";
@@ -120,4 +120,9 @@ export const Plus = styled.div`
   border-radius: 50%;
   user-select: none;
   color: #1890ff;
+`;
+
+export const BodyContent = styled.div`
+  background: #ffffff;
+  box-shadow: 8px 8px 19px #f5f6f8 !important;
 `;
