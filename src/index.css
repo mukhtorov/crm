@@ -57,3 +57,16 @@ body {
 .css-hyum1k-MuiToolbar-root {
   padding-left: 0 !important;
 }
+
+.MuiPaper-root,
+.MuiPaper-elevation,
+.MuiPaper-elevation4,
+.MuiAppBar-root,
+.MuiAppBar-colorPrimary,
+.MuiAppBar-positionFixed,
+.mui-fixed,
+.css-19z1ozs-MuiPaper-root-MuiAppBar-root {
+  box-shadow: 0px 8px 19px #f5f6f8 !important;
+  background-color: white !important;
+  /* border-bottom: 1px solid red; */
+}

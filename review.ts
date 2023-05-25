@@ -9,7 +9,7 @@
 
 // BUGS
 {
-  // sidebar expand, shake
+  // navbar + button center to fix
 }
 
 // done

@@ -13,6 +13,7 @@ import {
   Logo,
   NavlinkArrow,
   ParentLink,
+  Plus,
   SidebarContainer,
 } from "./style";
 import { sidebar } from "../../utils/sidebar";
@@ -21,6 +22,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Accordion, AccordionDetails, Button, Tooltip } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import Navbar from "../Navbar";
 
 const drawerWidth = 280;
 
@@ -90,6 +92,7 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
 
 export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
+  const [plus, setPlus] = React.useState(false);
   const [tooltipOpen, setTooltipOpen] = React.useState("");
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const location = useLocation();
@@ -119,18 +122,46 @@ export default function MiniDrawer() {
       setTooltipOpen(title);
     }
   };
+
+  const handlePlus = () => {
+    console.log("plus");
+
+    setPlus(!plus);
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <CssBaseline />
         <Toolbar>
-          <Logo onClick={handleDrawerOpen} open={open}>
-            CRM
+          <Logo onClick={handleDrawerOpen}>
+            {open ? (
+              <Tooltip
+                arrow
+                onClick={handlePlus}
+                open={plus}
+                disableFocusListener
+                disableHoverListener
+                title={
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Button>Student qo'shish</Button>
+                    <Button>To'lov</Button>
+                  </div>
+                }
+                placement="bottom"
+              >
+                <Plus>+</Plus>
+              </Tooltip>
+            ) : (
+              "CRM"
+            )}
           </Logo>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
+          <Navbar open={open} />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -194,6 +225,7 @@ export default function MiniDrawer() {
                               style={{
                                 display: "flex",
                                 alignItems: "center",
+                                background: "white",
                               }}
                             >
                               {icon} {title}
@@ -215,7 +247,7 @@ export default function MiniDrawer() {
                   </AccordionDetails>
                 </Accordion>
               ) : (
-                <LinkButton key={id || path}>
+                <LinkButton key={id || path} parent="true">
                   <Link to={path}>
                     {icon} {title}
                   </Link>

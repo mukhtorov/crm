@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const SidebarContainer = styled.div`
-  padding: 10px 0;
+  padding: 10px 0 0 0;
   box-shadow: 0px 8px 8px #f5f6f8;
   display: flex;
   flex-direction: column;
@@ -37,11 +37,13 @@ export const Logo = styled.h1<Props>`
   align-items: center;
   min-width: ${({ title }) => !title && "65px"};
   padding-left: ${({ title }) => title && "15px"};
-  color: ${(props) => (props.title ? "#1890ff" : "white")};
+  color: #1890ff;
+  /* color: ${(props) => (props.title ? "#1890ff" : "white")}; */
 
   height: 65px;
   border-bottom: 1px solid #f8fafc;
-  display: ${(props) => props.open && "none"};
+  /* display: ${(props) => props.open && "none"}; */
+  opacity: ${(props) => props.open && 0};
   cursor: pointer;
 `;
 
@@ -70,10 +72,12 @@ export const Link = styled(NavLink)`
 interface ButtonProp {
   key?: any;
   component?: string;
+  parent?: string;
 }
 
 export const LinkButton = styled(ListItemButton)<ButtonProp>`
   padding: 0 !important;
+  background: ${({ parent }) => parent && "white !important"};
 `;
 
 export const NavlinkArrow = styled(arrow)`
@@ -102,4 +106,18 @@ export const ParentLink = styled.div<any>`
       fill: #1890ff;
     }
   }
+`;
+
+export const Plus = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 21px;
+  height: 21px;
+  min-width: 21px;
+  min-height: 21px;
+  border: 1px solid #1890ff;
+  border-radius: 50%;
+  user-select: none;
+  color: #1890ff;
 `;
