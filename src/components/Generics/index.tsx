@@ -5,11 +5,13 @@ import { Container } from "./style";
 
 export const Generics = (props: any) => {
   const location = useLocation();
-  const { parent, title, path } = location.state;
   return (
     <Container>
-      <Header parent={parent} title={title} path={path} />
-      <h1>{location.pathname} page Coming Soon...</h1>
+      <Header
+        parent={location?.state?.parent}
+        title={location?.state?.title}
+        path={location?.state?.path}
+      />
     </Container>
   );
 };

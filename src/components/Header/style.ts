@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import { ReactComponent as arrow } from "../../assets/icons/rightArrow.svg";
 
+// type ColorProp = {
+//   bg: string;
+//   btn: string;
+// };
+
 export const Container = styled.div<any>`
-  background: #fff2e8;
+  background: ${({ color }) => color.bg};
   height: 76px;
   display: flex;
   align-items: center;

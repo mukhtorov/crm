@@ -12,6 +12,8 @@ export const SidebarContainer = styled.div`
   box-shadow: 0px 8px 8px #f5f6f8;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start
+  height: 100vh;
   .active {
     color: #1890ff;
     & path {
@@ -125,4 +127,8 @@ export const Plus = styled.div`
 export const BodyContent = styled.div`
   background: #ffffff;
   box-shadow: 8px 8px 19px #f5f6f8 !important;
+`;
+
+export const Logout = styled.div`
+  margin-top: auto;
 `;

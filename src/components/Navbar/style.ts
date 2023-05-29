@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -38,4 +39,42 @@ export const Plus = styled.div`
   user-select: none;
   color: #1890ff;
   margin: 0 15px;
+`;
+
+export const ButtonMUI = styled(Button)`
+  padding-left: 5px !important;
+  color: #253e5f !important;
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+`;
+
+export const User = styled.div`
+  display: flex;
+  margin-left: 20px;
+  max-width: 200px;
+  width: 100%;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
+  justify-content: space-between;
+`;
+
+export const UseImage = styled.img`
+  width: 48px;
+  height: 48px;
+`;
+export const UserTitle = styled.h1`
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #253e5f;
+  text-wrap: nowrap;
 `;

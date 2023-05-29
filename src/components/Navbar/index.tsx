@@ -7,10 +7,11 @@ import {
   Tooltip,
 } from "@mui/material";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
-import { Container, Time } from "./style";
+import { ButtonMUI, Container, Time, UseImage, User, UserTitle } from "./style";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
 import { Plus } from "./style";
+import NoPhoto from "../../assets/imgs/no-photo.jpeg";
 
 export const Navbar = ({ open }: { open: boolean }) => {
   const [lang, setLang] = useState("O'zbek");
@@ -75,22 +76,31 @@ export const Navbar = ({ open }: { open: boolean }) => {
       </Time>
 
       {/* Language */}
+
       <FormControl sx={{ m: 1, minWidth: 120, width: 120 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Select</InputLabel>
+        <InputLabel>Select</InputLabel>
         <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
           value={lang}
           onChange={handleChange}
           autoWidth
           label="Select"
           size="small"
         >
-          <MenuItem value="O'zbek">O'zbek</MenuItem>
-          <MenuItem value="English">English</MenuItem>
-          <MenuItem value="Russian">Russian</MenuItem>
+          <MenuItem sx={{ width: 120 }} value="O'zbek">
+            <ButtonMUI>O'zbek</ButtonMUI>
+          </MenuItem>
+          <MenuItem sx={{ width: 120, paddingLeft: 10 }} value="English">
+            <ButtonMUI>English</ButtonMUI>
+          </MenuItem>
+          <MenuItem sx={{ width: 120, paddingLeft: 10 }} value="Russian">
+            <ButtonMUI>Russian</ButtonMUI>
+          </MenuItem>
         </Select>
       </FormControl>
+      <User>
+        <UserTitle>Webbrain Academy</UserTitle>
+        <UseImage src={NoPhoto} alt="no photo" />
+      </User>
     </Container>
   );
 };

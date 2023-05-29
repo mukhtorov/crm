@@ -12,6 +12,7 @@ import {
   Link,
   LinkButton,
   Logo,
+  // Logout,
   NavlinkArrow,
   ParentLink,
   Plus,
@@ -167,7 +168,7 @@ export default function MiniDrawer() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <Logo title="true" onClick={handleDrawerClose}>
+          <Logo title="Webbrain CRM" onClick={handleDrawerClose}>
             Webbrain CRM
           </Logo>
         </DrawerHeader>
@@ -277,6 +278,7 @@ export default function MiniDrawer() {
               ))
             );
           })}
+          {/* <Logout>Logout</Logout> */}
         </SidebarContainer>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, background: "white" }}>
