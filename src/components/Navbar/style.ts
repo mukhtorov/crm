@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import styled from "styled-components";
+import { ReactComponent as Add } from "../../assets/icons/add.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -26,20 +27,20 @@ export const Time = styled.div`
   padding: 0 30px;
 `;
 
-export const Plus = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 21px;
-  height: 21px;
-  min-width: 21px;
-  min-height: 21px;
-  border: 1px solid #1890ff;
-  border-radius: 50%;
-  user-select: none;
-  color: #1890ff;
-  margin: 0 15px;
-`;
+// export const Plus = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// width: 21px;
+// height: 21px;
+//   min-width: 21px;
+//   min-height: 21px;
+//   border: 1px solid #1890ff;
+//   border-radius: 50%;
+//   user-select: none;
+//   color: #1890ff;
+//   margin: 0 15px;
+// `;
 
 export const ButtonMUI = styled(Button)`
   padding-left: 5px !important;
@@ -77,4 +78,15 @@ export const UserTitle = styled.h1`
   align-items: center;
   color: #253e5f;
   text-wrap: nowrap;
+`;
+
+export const Plus = styled(Add)<{ bg?: string }>`
+  display: flex;
+  margin: 0 15px;
+  min-width: 24px;
+  min-height: 24px;
+  & path {
+    fill: #1890ff;
+  }
+  user-select: none;
 `;

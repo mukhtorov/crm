@@ -93,7 +93,7 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
 }));
 
 export default function MiniDrawer() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [plus, setPlus] = React.useState(false);
   const [tooltipOpen, setTooltipOpen] = React.useState("");
   const [expanded, setExpanded] = React.useState<string | false>(false);

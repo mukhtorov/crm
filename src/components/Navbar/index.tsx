@@ -51,7 +51,7 @@ export const Navbar = ({ open }: { open: boolean }) => {
           }
           placement="bottom"
         >
-          <Plus>+</Plus>
+          <Plus />
         </Tooltip>
       )}
       {/* Search input */}

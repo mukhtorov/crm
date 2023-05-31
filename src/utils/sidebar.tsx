@@ -1,7 +1,7 @@
 import id from "../hooks/useIdGen";
 
 // icons
-import { ReactComponent as Analitcs } from "../assets/icons/analytics.svg";
+import { ReactComponent as AnalitcsIcon } from "../assets/icons/analytics.svg";
 import { ReactComponent as Lid } from "../assets/icons/lid.svg";
 import { ReactComponent as Finance } from "../assets/icons/finance.svg";
 import { ReactComponent as Student } from "../assets/icons/student.svg";
@@ -12,6 +12,7 @@ import { ReactComponent as Setting } from "../assets/icons/setting.svg";
 
 // components
 import Generics from "../components/Generics";
+import Analitics from "../pages/Analitcs";
 
 const { generate } = id();
 
@@ -21,8 +22,8 @@ export const sidebar = [
     title: "Statistika",
     path: "/statistika",
     hidden: false,
-    icon: <Analitcs className="icon" />,
-    element: <Generics />,
+    icon: <AnalitcsIcon className="icon" />,
+    element: <Analitics />,
   },
   {
     id: generate.next().value,
